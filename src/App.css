@@ -50,3 +50,13 @@ button:active {
   background-color: #564d62;
   color: #e0e0e0;
 }
+
+@media (max-width: 768px) {
+  .main__container {
+    flex-direction: column;
+  }
+
+  .playlist__title {
+    background-color: #1f1b24;
+  }
+}
