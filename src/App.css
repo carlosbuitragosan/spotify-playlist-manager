@@ -57,6 +57,6 @@ button:active {
   }
 
   .playlist__title {
-    background-color: #1f1b24;
+    background-color: transparent !important;
   }
 }
