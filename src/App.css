@@ -56,7 +56,14 @@ button:active {
     flex-direction: column;
   }
 
+  .playlist__container {
+    padding: 2rem 0 !important;
+  }
   .playlist__title {
     background-color: transparent !important;
+  }
+
+  .addPlaylist__button {
+    width: 90% !important;
   }
 }
