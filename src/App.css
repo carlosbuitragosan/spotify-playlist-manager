@@ -61,6 +61,16 @@ button:active {
   }
   .playlist__title {
     background-color: transparent !important;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+  }
+
+  .addPlaylist__button {
+    width: 90% !important;
+>>>>>>> 8723dfd (Fix some styling issues.)
+>>>>>>> 6cbcb18 (Fix some styling issues.)
   }
 
   .addPlaylist__button {
