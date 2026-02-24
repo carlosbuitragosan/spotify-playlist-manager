@@ -1,21 +1,23 @@
 ![Deploy Status](https://github.com/carlosbuitragosan/music-player/workflows/Deploy/badge.svg)
 
-# Purpose of this Project
+# Spotify Playlist Manager
+A React single-page application integrating the Spotify Web API using OAuth authentication. Authenticated users can search tracks and create playlists directly in their Spotify account.
 
-To practice skills learnt throughout the Codecademy React course.
+## Overview
+- OAuth (Implicit Grant) authentication with Spotify Accounts
+- Client-side access token extraction and persistence
+- Track search and playlist creation via Spotify Web API
+- Authorization header management for protected endpoints
+- 401 handling with automatic token invalidation
+- Conditional UI rendering using React Hooks
 
-# Technologies Used
+## Stack
+React · JavaScript · Spotify Web API · OAuth 2.0 (Implicit Grant) · GitHub Actions · GitHub Pages
 
-- Create-react-app to create environment with no configuration needed.
-- Prettier to ensure consistent code formatting and save time.
-- Spotify's API to access music data and playback control.
-- GitHub pages to host site.
-- GitHub Secrets to store client's information.
-- GitHub Actions to access variables during building process.
+## Deployment
+The application is automatically built and deployed via GitHub Actions, generating a production bundle with injected environment variables and publishing the /build directory to GitHub Pages on each push.
 
-# Features
-
-- Users can search for songs by song title, album title or artist.
-- Users can export their custom playlist to their personal spotify account.
-
-# Future Work
+## Next Steps
+- Replace the OAuth Implicit Grant flow with Authorization Code + PKCE
+- Retrieve and display the user’s existing playlists
+- Implement playlist editing (track removal and reordering)
