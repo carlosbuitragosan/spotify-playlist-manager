@@ -1,6 +1,6 @@
 {
-  "name": "jamming",
-  "homepage": "https://carlosbuitragosan.github.io/music-player/",
+  "name": "Spotify Playlist Manager",
+  "homepage": "https://carlosbuitragosan.github.io/spotify-playlist-manager/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
