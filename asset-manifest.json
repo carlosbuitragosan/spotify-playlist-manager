@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/music-player/static/css/main.bf9d5bcd.css",
-    "main.js": "/music-player/static/js/main.5abcee1e.js",
-    "index.html": "/music-player/index.html",
-    "main.bf9d5bcd.css.map": "/music-player/static/css/main.bf9d5bcd.css.map",
-    "main.5abcee1e.js.map": "/music-player/static/js/main.5abcee1e.js.map"
+    "main.css": "/spotify-playlist-manager/static/css/main.8492acdd.css",
+    "main.js": "/spotify-playlist-manager/static/js/main.b2af53cd.js",
+    "index.html": "/spotify-playlist-manager/index.html",
+    "main.8492acdd.css.map": "/spotify-playlist-manager/static/css/main.8492acdd.css.map",
+    "main.b2af53cd.js.map": "/spotify-playlist-manager/static/js/main.b2af53cd.js.map"
   },
   "entrypoints": [
-    "static/css/main.bf9d5bcd.css",
-    "static/js/main.5abcee1e.js"
+    "static/css/main.8492acdd.css",
+    "static/js/main.b2af53cd.js"
   ]
 }
