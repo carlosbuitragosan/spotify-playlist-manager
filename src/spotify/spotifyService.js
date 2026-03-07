@@ -4,9 +4,78 @@ const redirectUri =
     ? process.env.REACT_APP_SPOTIFY_REDIRECT_URI
     : 'http://127.0.0.1:3000/';
 
-export const redirectToSpotify = () => {
+// Generate code_verifier
+const generateCodeVerifier = (length) => {
+  const randomBytes = new Uint8Array(length); // typed array
+  crypto.getRandomValues(randomBytes);
+
+  return Array.from(randomBytes)
+    .map((value) => (value % 36).toString(36))
+    .join('');
+};
+
+// Generate code_challenge
+const generateCodeChallenge = async (codeVerifier) => {
+  const encoder = new TextEncoder();
+  const verifierBytes = encoder.encode(codeVerifier); // typed array
+  const hashBuffer = await crypto.subtle.digest('SHA-256', verifierBytes);
+
+  return btoa(String.fromCharCode(...new Uint8Array(hashBuffer)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+};
+
+export const redirectToSpotify = async () => {
   const scope = 'user-read-private user-read-email playlist-modify-public';
-  window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
+  const codeVerifier = generateCodeVerifier(64);
+  const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+  sessionStorage.setItem('code_verifier', codeVerifier);
+
+  const params = new URLSearchParams({
+    client_id: clientId,
+    response_type: 'code',
+    redirect_uri: redirectUri,
+    code_challenge_method: 'S256',
+    code_challenge: codeChallenge,
+    scope,
+  });
+  window.location.href = `https://accounts.spotify.com/authorize?${params}`;
+};
+
+export const getAccessToken = async () => {
+  const params = new URLSearchParams(window.location.search);
+  const authorizationCode = params.get('code');
+
+  if (!authorizationCode) return null;
+
+  const codeVerifier = sessionStorage.getItem('code_verifier');
+
+  const body = new URLSearchParams({
+    client_id: clientId,
+    grant_type: 'authorization_code',
+    code: authorizationCode,
+    redirect_uri: redirectUri,
+    code_verifier: codeVerifier,
+  });
+
+  const response = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body,
+  });
+
+  const data = await response.json();
+
+  if (data.access_token) {
+    localStorage.setItem('spotify_token', data.access_token);
+    window.history.replaceState({}, document.title, redirectUri);
+    return data.access_token;
+  }
+  return null;
 };
 
 export const fetchUserId = async (accessToken) => {
@@ -24,6 +93,7 @@ export const fetchUserId = async (accessToken) => {
   if (!response.ok) {
     throw new Error('Failed to fetch user ID', response.statusText);
   }
+
   const data = await response.json();
   return data.id;
 };

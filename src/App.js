@@ -11,6 +11,7 @@ import {
   fetchUserId,
   searchSpotify,
   savePlaylist,
+  getAccessToken,
 } from './spotify/spotifyService';
 
 function App() {
@@ -20,26 +21,19 @@ function App() {
   const [playlist, setPlaylist] = useState([]);
 
   useEffect(() => {
-    const hash = window.location.hash;
-    let token = localStorage.getItem('spotify_token');
-
-    if (hash) {
-      const params = new URLSearchParams(hash.replace('#', ''));
-      const urlToken = params.get('access_token');
-
-      if (urlToken) {
-        token = urlToken;
-        window.location.hash = '';
-        localStorage.setItem('spotify_token', token);
+    const initializeAuth = async () => {
+      let token = localStorage.getItem('spotify_token');
+      if (!token) {
+        token = await getAccessToken();
       }
-    }
-    if (token) {
-      setToken(token);
-      (async () => {
+      if (token) {
+        setToken(token);
         const userId = await fetchUserId(token);
         setUserId(userId);
-      })();
-    }
+      }
+    };
+
+    initializeAuth();
   }, []);
 
   const handleSearch = async (query) => {
