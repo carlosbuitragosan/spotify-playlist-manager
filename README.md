@@ -6,7 +6,7 @@ A React single-page application integrating the Spotify Web API using OAuth auth
 
 ## Overview
 
-- OAuth (Implicit Grant) authentication with Spotify Accounts
+- OAuth (Authorization Code + PKCE) authentication with Spotify Accounts
 - Client-side access token extraction and persistence
 - Track search and playlist creation via Spotify Web API
 - Authorization header management for protected endpoints
@@ -15,7 +15,7 @@ A React single-page application integrating the Spotify Web API using OAuth auth
 
 ## Stack
 
-React · JavaScript · Spotify Web API · OAuth 2.0 (Implicit Grant) · GitHub Actions · GitHub Pages
+React · JavaScript · Spotify Web API · OAuth 2.0 (Authorization Code + PKCE) · GitHub Actions · GitHub Pages
 
 ## Deployment
 
@@ -23,6 +23,5 @@ The application is automatically built and deployed via GitHub Actions, generati
 
 ## Next Steps
 
-- Replace the OAuth Implicit Grant flow with Authorization Code + PKCE
 - Retrieve and display the user’s existing playlists
 - Implement playlist editing (track removal and reordering)
